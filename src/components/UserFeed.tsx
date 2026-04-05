@@ -45,7 +45,7 @@ export default function UserFeed({ initialPosts, initialCursor,username }: PostL
         <div className="flex flex-col items-center gap-20 mt-[10vh]">
             {posts.map((post) => (
                 <div key={post._id} className="p-5 border max-w-2xl rounded-md bg-gray-200">
-                    <Link href={`/p/${post._id}`} className="text-xl font-bold">{post.title}</Link>
+                    <Link href={`/p/${post._id}`} prefetch={false} className="text-xl font-bold">{post.title}</Link>
                     <div className="">
                         <p>{post.content}</p>
                     </div>

@@ -58,7 +58,7 @@ export default function MainFeed({ initialPosts, initialCursor }: PostListProps)
             {posts.map((post) => (
                 <div key={post._id} className="p-5 border max-w-2xl rounded-md bg-gray-200 relative">
                     <PostMenu myPost={username == post.authorName} postId={post._id}/>
-                    <Link href={`/p/${post._id}`} className="text-xl font-bold">{post.title}</Link>
+                    <Link href={`/p/${post._id}`} prefetch={false} className="text-xl font-bold">{post.title}</Link>
                     <div className="">
                         <p>{post.content}</p>
                     </div>
