@@ -36,9 +36,9 @@ export default function PostMenu({ myPost,postId }: {
     }
 
     return (
-        <div className="absolute right-2 top-1" ref={menuRef}>
+        <div className="relative" ref={menuRef}>
             <div className="">
-                <button onClick={toggleMenu} className="cursor-pointer relative hover:bg-gray-300 p-1 rounded-full">
+                <button onClick={toggleMenu} className="cursor-pointer p-1 hover:bg-gray-300 rounded-full">
                     <Ellipsis />
                 </button>
             </div>

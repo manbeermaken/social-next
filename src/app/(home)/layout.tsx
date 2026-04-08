@@ -30,7 +30,7 @@ export default async function RootLayout({
       <Providers initialUsername={username}>
         <Sidebar />
         {children}
-        <Trending />
+        {/* <Trending /> */}
       </Providers>
     </div>
   );

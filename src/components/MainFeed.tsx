@@ -7,28 +7,21 @@ import { useState, useEffect, useContext } from "react";
 import { useInView } from "react-intersection-observer";
 import PostMenu from "./PostMenu";
 import { AppContext } from "./Providers"
-
-type Post = {
-    _id: string;
-    title: string;
-    content: string;
-    authorId: string;
-    authorName: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import PostDate from "./PostDate";
+import { type Post as PostType } from "@/lib/actions/posts";
+import Post from "./Post";
 
 interface PostListProps {
-    initialPosts: Post[];
+    initialPosts: PostType[];
     initialCursor: string | null;
 }
 
 export default function MainFeed({ initialPosts, initialCursor }: PostListProps) {
-    const [posts, setPosts] = useState<Post[]>(initialPosts);
+    const [posts, setPosts] = useState<PostType[]>(initialPosts);
     const [cursor, setCursor] = useState<string | null>(initialCursor);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false)
-    const {username,setUsername} = useContext(AppContext)
+    const { username, setUsername } = useContext(AppContext)
 
     const { ref, inView, entry } = useInView();
 
@@ -54,25 +47,9 @@ export default function MainFeed({ initialPosts, initialCursor }: PostListProps)
     }
 
     return (
-        <div className="flex flex-col items-center gap-20 mt-[10vh]">
+        <div className="flex flex-col gap-20 mt-[10vh] w-[80%] mx-auto">
             {posts.map((post) => (
-                <div key={post._id} className="p-5 border max-w-2xl rounded-md bg-gray-200 relative">
-                    <PostMenu myPost={username == post.authorName} postId={post._id}/>
-                    <Link href={`/p/${post._id}`} prefetch={false} className="text-xl font-bold">{post.title}</Link>
-                    <div className="">
-                        <p>{post.content}</p>
-                    </div>
-                    <div className="flex justify-between mt-3">
-                        <Link href={`/u/${post.authorName}`} className="font-bold">{post.authorName}</Link>
-                        <span>
-                            {new Date(post.createdAt).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                            })}
-                        </span>
-                    </div>
-                </div>
+                <Post post={post} key={post._id}/>
             ))}
 
             {cursor && (

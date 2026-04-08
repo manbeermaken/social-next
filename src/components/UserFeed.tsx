@@ -1,19 +1,20 @@
 "use client"
 
-import { fetchUserPosts, type Post } from "@/lib/actions/posts"
+import { fetchUserPosts, type Post as PostType } from "@/lib/actions/posts"
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import Post from "./Post";
 
 interface PostListProps {
-    initialPosts: Post[];
+    initialPosts: PostType[];
     initialCursor: string | null;
-    username:string;
+    username: string;
 }
 
-export default function UserFeed({ initialPosts, initialCursor,username }: PostListProps) {
-    const [posts, setPosts] = useState<Post[]>(initialPosts);
+export default function UserFeed({ initialPosts, initialCursor, username }: PostListProps) {
+    const [posts, setPosts] = useState<PostType[]>(initialPosts);
     const [cursor, setCursor] = useState<string | null>(initialCursor);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false)
@@ -29,7 +30,7 @@ export default function UserFeed({ initialPosts, initialCursor,username }: PostL
     const loadMorePosts = async () => {
         setIsLoading(true)
 
-        const data = await fetchUserPosts(cursor,username)
+        const data = await fetchUserPosts(cursor, username)
 
         if (data && !data.error) {
             setPosts(prevPosts => [...prevPosts, ...data.posts])
@@ -42,24 +43,9 @@ export default function UserFeed({ initialPosts, initialCursor,username }: PostL
     }
 
     return (
-        <div className="flex flex-col items-center gap-20 mt-[10vh]">
+        <div className="flex flex-col gap-20 mt-10 w-[80%] mx-auto">
             {posts.map((post) => (
-                <div key={post._id} className="p-5 border max-w-2xl rounded-md bg-gray-200">
-                    <Link href={`/p/${post._id}`} prefetch={false} className="text-xl font-bold">{post.title}</Link>
-                    <div className="">
-                        <p>{post.content}</p>
-                    </div>
-                    <div className="flex justify-between mt-3">
-                        <Link href={`/u/${post.authorName}`} className="font-bold">{post.authorName}</Link>
-                        <span>
-                            {new Date(post.createdAt).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                            })}
-                        </span>
-                    </div>
-                </div>
+                <Post post={post} key={post._id} />
             ))}
 
             {cursor && (

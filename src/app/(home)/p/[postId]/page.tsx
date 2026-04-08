@@ -11,7 +11,7 @@ export default async function singlePost({ params }: {
     }
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="w-[80%] mx-auto mt-[10vh]">
             <Post post={post}></Post>
         </div>
     )

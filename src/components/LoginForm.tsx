@@ -50,7 +50,7 @@ export default function LoginForm() {
                         disabled:bg-gray-300 disabled:cursor-not-allowed">
                         {isPending ? <Loader className="animate-spin mx-auto"/> : 'Log in'}
                     </button>
-                    <button className="cursor-pointer bg-gray-100 py-3 rounded-md hover:bg-white">Forgot password?</button>
+                    {/* <button className="cursor-pointer bg-gray-100 py-3 rounded-md hover:bg-white">Forgot password?</button> */}
                     <Link href="/signup" className="cursor-pointer bg-white border-2 border-gray-400 py-3 rounded-md hover:bg-gray-50 text-center">
                         Create new account
                     </Link>
