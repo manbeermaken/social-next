@@ -1,7 +1,8 @@
 import { fetchUserPosts } from "@/lib/actions/posts";
 import UserFeed from "@/components/UserFeed";
 import { getCurrentUsername } from "@/lib/decode";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, Settings } from "lucide-react";
+import Link from "next/link";
 
 export default async function User({ params }: {
     params: Promise<{ username: string }>
@@ -20,6 +21,9 @@ export default async function User({ params }: {
                     <div className="flex items-center gap-5">
                         <CircleUserRound size={64} />
                         <h1>{username}</h1>
+                        <Link href={'/a/edit'} >
+                            <Settings />
+                        </Link>
                     </div>
                 </div>
                 : <div className="mx-auto w-[80%]">

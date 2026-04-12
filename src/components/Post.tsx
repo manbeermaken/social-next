@@ -17,7 +17,7 @@ export default function Post({ post }: {
             <div className="flex justify-between mb-2 text-sm">
                 <div className="flex gap-1 items-center">
                     <Link href={`/u/${post.authorName}`} className="font-semibold">{post.authorName},</Link>
-                    <PostDate createdAt={post.createdAt} />
+                    <PostDate createdAt={post.createdAt} updatedAt={post.updatedAt}/>
                 </div>
                 <PostMenu myPost={username == post.authorName} postId={post._id} />
             </div>

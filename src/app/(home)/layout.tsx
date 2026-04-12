@@ -6,8 +6,10 @@ import { cookies, headers } from "next/headers";
 
 export default async function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
   const headersList = await headers()
@@ -30,6 +32,7 @@ export default async function RootLayout({
       <Providers initialUsername={username}>
         <Sidebar />
         {children}
+        {modal}
         {/* <Trending /> */}
       </Providers>
     </div>

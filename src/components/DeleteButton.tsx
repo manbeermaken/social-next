@@ -37,7 +37,6 @@ export default function DeleteButton({ postId }: { postId: string }) {
 
         const dialogDimensions = dialogRef.current.getBoundingClientRect();
 
-        // If the mouse click coordinates are outside those dimensions, close it
         if (
             e.clientX < dialogDimensions.left ||
             e.clientX > dialogDimensions.right ||

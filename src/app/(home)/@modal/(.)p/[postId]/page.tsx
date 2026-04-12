@@ -1,4 +1,4 @@
-import Post from "@/components/Post"
+import ModalPost from "@/components/ModalPost"
 import { getPost, type ActionState } from "@/lib/actions/posts"
 
 export default async function SinglePost({ params }: {
@@ -11,8 +11,6 @@ export default async function SinglePost({ params }: {
     }
 
     return (
-        <div className="w-[80%] mx-auto mt-[10vh]">
-            <Post post={post}></Post>
-        </div>
+        <ModalPost post={post}></ModalPost>
     )
 }

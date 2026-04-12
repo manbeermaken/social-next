@@ -21,10 +21,14 @@ function getRelativeTime(dateString: string) {
     return `${Math.floor(diff / year)}y`;
 }
 
-export default function PostDate({ createdAt }: { createdAt: string }) {
+export default function PostDate({ createdAt, updatedAt }: { 
+    createdAt: string;
+    updatedAt: string;
+}) {
+    const postUpdated = createdAt == updatedAt
     return (
         <span className="font-light">
-            {getRelativeTime(createdAt)}
+            {!postUpdated ? `${getRelativeTime(createdAt)} edited ${getRelativeTime(updatedAt)}` : getRelativeTime(createdAt)}
         </span>
     )
 }
