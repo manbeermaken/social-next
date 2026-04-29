@@ -53,13 +53,13 @@ export default function MainFeed({ initialPosts, initialCursor }: PostListProps)
             ))}
 
             {cursor && (
-                <div ref={ref}>
+                <div ref={ref} className="flex justify-center mb-16">
                     {isLoading ? <Loader className="animate-spin mx-auto" /> : "Scroll for more"}
                 </div>
             )}
 
             {!cursor && posts.length > 0 && (
-                <div>You have reached the end!</div>
+                <div className="flex justify-center mb-16">You have reached the end!</div>
             )}
         </div>
     )
