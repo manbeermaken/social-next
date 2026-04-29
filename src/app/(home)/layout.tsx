@@ -1,3 +1,4 @@
+import Navbar from "@/components/home/Navbar";
 import Providers from "@/components/Providers";
 import Sidebar from "@/components/Sidebar";
 import Trending from "@/components/Trending";
@@ -28,8 +29,9 @@ export default async function RootLayout({
   }
 
   return (
-    <div className="grid grid-cols-[1fr_6fr_2fr] bg-gray-300 gap-4">
+    <div className="md:grid md:grid-cols-[1fr_6fr_2fr] gap-4">
       <Providers initialUsername={username}>
+        <Navbar />
         <Sidebar />
         {children}
         {modal}

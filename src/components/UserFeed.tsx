@@ -43,7 +43,7 @@ export default function UserFeed({ initialPosts, initialCursor, username }: Post
     }
 
     return (
-        <div className="flex flex-col gap-20 mt-10 w-[80%] mx-auto">
+        <div className="flex flex-col gap-20 mt-[10vh] w-[80%] mx-auto">
             {posts.map((post) => (
                 <Post post={post} key={post._id} />
             ))}

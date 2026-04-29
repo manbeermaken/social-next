@@ -4,19 +4,24 @@ import Link from "next/link"
 import PostDate from "./PostDate"
 import PostMenu from "./PostMenu"
 import { AppContext } from "./Providers"
-import { useContext, useEffect, useRef } from "react"
-import { useRouter } from "next/navigation"
+import { useContext, useEffect, useRef, useState } from "react"
+import { redirect, useRouter } from "next/navigation"
 
 export default function ModalPost({ post }: { post: Post }) {
+    const [isPhone, setIsPhone] = useState(false)
     const { username, setUsername } = useContext(AppContext)
     const dialogRef = useRef<HTMLDialogElement>(null)
     const router = useRouter()
 
     useEffect(() => {
+        // if (window.innerWidth < 768) {
+        //     setIsPhone(true)
+        // } else {
         if (!dialogRef.current?.open) {
             dialogRef.current?.showModal()
         }
         document.body.style.overflow = "hidden"
+        // }
         return () => {
             document.body.style.overflow = "unset"
         }
@@ -49,15 +54,13 @@ export default function ModalPost({ post }: { post: Post }) {
         }
     };
 
-
-
     return (
         <dialog ref={dialogRef} onClose={handleClose} onClick={handleBackdropClick} className="top-[20%] mx-auto w-[60%] rounded-lg backdrop:bg-black/50">
             <div className="px-5 pb-5 pt-2 border rounded-md w-full bg-gray-200">
                 <div className="flex justify-between mb-2 text-sm">
                     <div className="flex gap-1 items-center">
                         <Link href={`/u/${post.authorName}`} className="font-semibold">{post.authorName},</Link>
-                        <PostDate createdAt={post.createdAt} updatedAt={post.updatedAt}/>
+                        <PostDate createdAt={post.createdAt} updatedAt={post.updatedAt} />
                     </div>
                     <PostMenu myPost={username == post.authorName} postId={post._id} />
                 </div>

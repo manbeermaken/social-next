@@ -15,7 +15,7 @@ function SubmitButton() {
             disabled={pending}
             className="cursor-pointer px-4 py-2 bg-red-500 text-white rounded-md disabled:bg-red-400 disabled:cursor-not-allowed"
             whileHover={!pending ? { scale: 1.05, y: -2 } : undefined}
-            whileTap={!pending ? { scale: 0.9, y: 1, backgroundColor: "#b91c1c" } : undefined} 
+            whileTap={!pending ? { scale: 0.9, y: 1, backgroundColor: "#b91c1c" } : undefined}
             transition={{ type: 'spring', stiffness: 300, damping: 15 }}
         >
             {pending ? <Loader className="animate-spin mx-auto" /> : 'Log out'}
@@ -73,7 +73,8 @@ export default function Logout() {
             </motion.div>
 
             <dialog ref={dialogRef} onClose={handleDialogClose} onClick={handleBackdropClick}
-                className="m-0 mt-auto w-full max-w-full rounded-t-2xl rounded-b-none md:top-[20%] md:mx-auto md:w-auto md:max-w-md p-6 md:rounded-lg backdrop:bg-black/50">
+                className="m-0 mt-auto w-full max-w-full rounded-t-2xl rounded-b-none 
+                md:top-[20%] md:mx-auto md:w-auto md:max-w-md p-6 md:rounded-lg backdrop:bg-black/50">
                 <h2 className="text-lg font-bold mb-4">Confirm Logout</h2>
                 <p className="mb-4">Are you sure you want to log out?</p>
 
