@@ -7,7 +7,11 @@ export default async function SinglePost({ params }: {
     const postId = (await params).postId
     const post = await getPost(postId)
     if(post && typeof post === "object" && "error" in post){
-        return <p>post not found</p>
+        return (
+        <div className="w-[80%] mx-auto mt-[10vh] text-center">
+            <h1 className="font-bold text-xl">{post.error}</h1>
+        </div>
+        )
     }
 
     return (
