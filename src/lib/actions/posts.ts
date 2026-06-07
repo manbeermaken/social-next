@@ -18,6 +18,7 @@ export type ActionState = {
 
 export type Post = {
   _id: string;
+  id: string;
   title: string;
   content: string;
   authorId: string;
@@ -94,7 +95,7 @@ export async function createPost(
     if (!res.ok) {
       return { error: data.message };
     }
-    newPostId = data._id;
+    newPostId = data._id || data.id;
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong" };
@@ -123,12 +124,11 @@ export async function fetchUserPosts(cursor: string | null, username: string) {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await res.json()
+
+    const data = await res.json();
     if (!res.ok) {
-      console.log(data)
-      return { error: data.message };
+      return { error: data.detail };
     }
-    
 
     return data;
   } catch (err) {
@@ -155,11 +155,11 @@ export async function getPost(postId: string): Promise<ActionState | Post> {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
-    if (!res.ok) {
-      console.error(`Backend returned status: ${res.status}`);
-      return { error: "Failed to fetch posts from server" };
+    const data = await res.json()
+    if (res.status === 404) {
+      return { error: data.detail };
     }
-    return await res.json();
+    return data;
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong" };
@@ -195,10 +195,10 @@ export async function updatePost(
       },
       body: JSON.stringify({ title, content }),
     });
-    const data = await res.json();
-
-    if (!res.ok) {
-      return { error: data.message };
+    
+    if (res.status === 403) {
+      const data = await res.json();
+      return { error: data.detail };
     }
   } catch (err) {
     console.log(err);
@@ -232,9 +232,9 @@ export async function deletePost(
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await res.json();
-    if (!res.ok) {
-      return { error: data.message };
+    if (res.status === 403) {
+      const data = await res.json();
+      return { error: data.detail };
     }
   } catch (err) {
     console.log(err);
