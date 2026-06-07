@@ -36,7 +36,7 @@ export async function loginUser(
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV == "production",
-      sameSite: "lax",
+      sameSite: "strict",
       path: "/",
       maxAge: 14 * 60,
     });
@@ -44,7 +44,7 @@ export async function loginUser(
     cookieStore.set("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV == "production",
-      sameSite: "lax",
+      sameSite: "strict",
       path: "/",
       maxAge: 7 * 24 * 60 * 60,
     });
@@ -73,9 +73,9 @@ export async function signupUser(
       body: JSON.stringify({ username, password }),
     });
 
-    if (!res.ok) {
+    if (res.status !== 201) {
       const data = await res.json();
-      return { error: data.message };
+      return { error: data.detail };
     }
 
     const { accessToken, refreshToken } = await res.json();
@@ -84,7 +84,7 @@ export async function signupUser(
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV == "production",
-      sameSite: "lax",
+      sameSite: "strict",
       path: "/",
       maxAge: 14 * 60,
     });
@@ -92,7 +92,7 @@ export async function signupUser(
     cookieStore.set("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV == "production",
-      sameSite: "lax",
+      sameSite: "strict",
       path: "/",
       maxAge: 7 * 24 * 60 * 60,
     });
