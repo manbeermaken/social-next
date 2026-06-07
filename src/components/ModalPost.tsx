@@ -62,10 +62,10 @@ export default function ModalPost({ post }: { post: Post }) {
                         <Link href={`/u/${post.authorName}`} className="font-semibold">{post.authorName},</Link>
                         <PostDate createdAt={post.createdAt} updatedAt={post.updatedAt} />
                     </div>
-                    <PostMenu myPost={username == post.authorName} postId={post._id} />
+                    <PostMenu myPost={username == post.authorName} postId={post._id || post.id} />
                 </div>
                 <div className="mb-5">
-                    <Link href={`/p/${post._id}`} prefetch={false} className="text-2xl font-bold">{post.title}</Link>
+                    <Link href={`/p/${post._id || post.id}`} prefetch={false} className="text-2xl font-bold">{post.title}</Link>
                 </div>
                 <div className="">
                     <p>{post.content}</p>

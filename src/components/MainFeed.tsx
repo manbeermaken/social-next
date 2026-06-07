@@ -49,7 +49,7 @@ export default function MainFeed({ initialPosts, initialCursor }: PostListProps)
     return (
         <div className="flex flex-col gap-20 mt-[10vh] w-[80%] mx-auto">
             {posts.map((post) => (
-                <Post post={post} key={post._id}/>
+                <Post post={post} key={post._id || post.id}/>
             ))}
 
             {cursor && (
