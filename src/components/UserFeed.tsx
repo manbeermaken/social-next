@@ -55,7 +55,7 @@ export default function UserFeed({ initialPosts, initialCursor, username }: Post
             )}
 
             {!cursor && posts.length > 0 && (
-                <div>You have reached the end!</div>
+                <div className="flex justify-center mb-16">You have reached the end!</div>
             )}
         </div>
     )
