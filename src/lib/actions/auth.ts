@@ -27,7 +27,7 @@ export async function loginUser(
 
     if (!res.ok) {
       const data = await res.json();
-      return { error: data.message };
+      return { error: data.detail };
     }
 
     const { accessToken, refreshToken } = await res.json();
@@ -110,15 +110,20 @@ export async function logoutUser() {
   cookieStore.delete("refreshToken");
 
   if (refreshToken) {
-    const logoutRes = await fetch(`${process.env.BACKEND_URL}/auth/logout`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refreshToken }),
-    });
-    if (!logoutRes.ok) {
-      console.error("Backend logout failed:");
+    try {
+      const res = await fetch(`${process.env.BACKEND_URL}/auth/logout`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refreshToken }),
+      });
+      if (res.status !== 204) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
