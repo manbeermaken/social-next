@@ -14,7 +14,7 @@ export default function EditForm({post}:{post:Post}) {
                             peer-focus:top-1 peer-focus:text-sm peer-focus:translate-y-0`
     return (
         <div className="relative">
-            {state?.error && (<div className="absolute top-0 right-2 font-semibold text-red-500 -translate-y-[150%]">{state.error}</div>)}
+            {state?.error && (<div className="absolute top-0 right-2 font-semibold text-red-500 translate-y-[-150%]">{state.error}</div>)}
             <form action={formAction} className="flex flex-col gap-5">
                 <input type="hidden" name="postId" value={post._id || post.id}/>
                 <div className="relative bg-white rounded-xl border-4 border-gray-300  hover:bg-gray-50 focus-within:border-gray-400">
